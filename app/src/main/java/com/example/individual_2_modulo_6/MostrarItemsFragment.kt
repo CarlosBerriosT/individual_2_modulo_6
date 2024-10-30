@@ -4,34 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.example.individual_2_modulo_6.databinding.FragmentMostrarItemsBinding
 
 class MostrarItemsFragment : Fragment() {
-    private lateinit var viewModel: ConsumoViewModel
-    private lateinit var tvConsumos: TextView
+
+    private var _binding: FragmentMostrarItemsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_mostrar_items, container, false)
+    ): View {
+        _binding = FragmentMostrarItemsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(ConsumoViewModel::class.java)
-        tvConsumos = view.findViewById(R.id.tv_consumos)
-
-        viewModel.todosLosConsumos.observe(viewLifecycleOwner, Observer { consumos ->
-            val builder = StringBuilder()
-            consumos.forEach { consumo ->
-                builder.append("${consumo.nombreItem}: ${consumo.calcularTotal()}\n")
-            }
-            tvConsumos.text = builder.toString()
-        })
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
