@@ -5,12 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "consumos")
 data class Consumo(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val nombreItem: String,
     val precioUnitario: Double,
     val cantidad: Int
-) {
-    fun calcularTotal(): Double {
-        return precioUnitario * cantidad
-    }
-}
+)

@@ -39,7 +39,7 @@ android {
     buildFeatures {
         viewBinding = true // Habilitar View Binding
         buildFeatures {
-            dataBinding = false // Asegúrate de que esté desactivado
+            dataBinding = true // Asegúrate de que esté desactivado
         }
     }
 }

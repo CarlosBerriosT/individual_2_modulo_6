@@ -1,39 +1,30 @@
 package com.example.individual_2_modulo_6
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.individual_2_modulo_6.databinding.ItemConsumoBinding
 
+class ConsumptionsAdapter(private val consumos: List<Consumo>) : RecyclerView.Adapter<ConsumptionsAdapter.ConsumoViewHolder>() {
 
-    import android.view.LayoutInflater
-    import android.view.View
-    import android.view.ViewGroup
-    import android.widget.TextView
-    import androidx.recyclerview.widget.RecyclerView
-
-class ConsumoAdapter(private var consumos: List<Consumo>) : RecyclerView.Adapter<ConsumoAdapter.ConsumoViewHolder>() {
-
-        class ConsumoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val nombreItem: TextView = itemView.findViewById(R.id.tv_nombre_item)
-            val precioUnitario: TextView = itemView.findViewById(R.id.tv_precio_unitario)
-            val cantidad: TextView = itemView.findViewById(R.id.tv_cantidad)
-            val total: TextView = itemView.findViewById(R.id.tv_total)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConsumoViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_consumo, parent, false)
-            return ConsumoViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ConsumoViewHolder, position: Int) {
-            val consumo = consumos[position]
-            holder.nombreItem.text = consumo.nombreItem
-            holder.precioUnitario.text = "Precio: ${consumo.precioUnitario}€"
-            holder.cantidad.text = "Cantidad: ${consumo.cantidad}"
-            holder.total.text = "Total: ${consumo.calcularTotal()}€"
-        }
-
-        override fun getItemCount(): Int = consumos.size
-
-        fun setDatos(nuevosConsumos: List<Consumo>) {
-            this.consumos = nuevosConsumos
-            notifyDataSetChanged()
+    class ConsumoViewHolder(private val binding: ItemConsumoBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(consumo: Consumo) {
+            binding.tvNombreItem.text = consumo.nombreItem
+            binding.tvPrecioUnitario.text = consumo.precioUnitario.toString()
+            binding.tvCantidad.text = consumo.cantidad.toString()
         }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConsumoViewHolder {
+        val binding = ItemConsumoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ConsumoViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ConsumoViewHolder, position: Int) {
+        holder.bind(consumos[position])
+    }
+
+    override fun getItemCount(): Int {
+        return consumos.size
+    }
+}

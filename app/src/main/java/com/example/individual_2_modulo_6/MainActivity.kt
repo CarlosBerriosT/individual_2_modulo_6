@@ -2,6 +2,8 @@ package com.example.individual_2_modulo_6
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
@@ -15,15 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         // Cargar el fragmento inicial
         if (savedInstanceState == null) {
-            loadFragment(AgregarItemFragment())
+            // Usar NavHostFragment para navegar
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navController = navHostFragment.navController
+            navController.navigate(R.id.agregarItemFragment) // Asegúrate de que el ID exista en tu nav_graph
         }
-    }
-
-    // Método para cargar fragmentos
-     fun loadFragment(fragment: androidx.fragment.app.Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
     }
 }

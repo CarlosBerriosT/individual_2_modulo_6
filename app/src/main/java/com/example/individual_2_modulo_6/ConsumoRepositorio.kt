@@ -1,21 +1,11 @@
 package com.example.individual_2_modulo_6
 
-
-
-import androidx.lifecycle.LiveData
-
-class ConsumoRepositorio(private val consumoDao: ConsumoDao) {
-    val todosLosConsumos: LiveData<List<Consumo>> = consumoDao.obtenerTodosLosConsumos()
-
-    suspend fun insertar(consumo: Consumo) {
-        consumoDao.insertar(consumo)
+class ConsumoRepository(private val consumoDao: ConsumoDao) {
+    suspend fun addConsumo(consumo: Consumo) {
+        consumoDao.insert(consumo)
     }
 
-    suspend fun eliminar(consumo: Consumo) {
-        consumoDao.eliminar(consumo)
-    }
-
-    suspend fun eliminarTodo() {
-        consumoDao.eliminarTodo()
+    suspend fun getConsumptions(): List<Consumo> {
+        return consumoDao.getAllConsumptions()
     }
 }
