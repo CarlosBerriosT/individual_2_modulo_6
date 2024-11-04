@@ -12,15 +12,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        // Cargar el fragmento inicial
         if (savedInstanceState == null) {
-            // Usar NavHostFragment para navegar
+
             val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             val navController = navHostFragment.navController
-            navController.navigate(R.id.agregarItemFragment) // Asegúrate de que el ID exista en tu nav_graph
+            navController.navigate(R.id.agregarItemFragment)
         }
     }
 }

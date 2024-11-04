@@ -20,7 +20,7 @@ class ConsumoViewModel(application: Application) : AndroidViewModel(application)
     fun addConsumo(consumo: Consumo) {
         viewModelScope.launch {
             repository.addConsumo(consumo)
-            fetchConsumptions()  // Actualiza la lista
+            fetchConsumptions()
         }
     }
 
