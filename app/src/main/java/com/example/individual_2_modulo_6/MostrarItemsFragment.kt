@@ -24,7 +24,7 @@ class MostrarItemsFragment : Fragment() {
         viewModel.consumptions.observe(viewLifecycleOwner) { consumos ->
             // Actualiza tu vista con los consumos
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
-            binding.recyclerView.adapter = ConsumptionsAdapter(consumos) // Asumiendo que tienes un RecyclerView y un adapter
+            binding.recyclerView.adapter = ConsumptionsAdapter(consumos)
         }
 
         viewModel.fetchConsumptions()
